@@ -5,7 +5,7 @@
  * put as much logic in the controller (instead of the link functions) as possible so it can be easily tested.
  */
 uis.controller('uiSelectCtrl',
-  ['$scope', '$element', '$timeout', '$filter', 'RepeatParser', 'uiSelectMinErr', 'uiSelectConfig',
+  ['$scope', '$element', '$timeout', '$filter', 'uisRepeatParser', 'uiSelectMinErr', 'uiSelectConfig',
   function($scope, $element, $timeout, $filter, RepeatParser, uiSelectMinErr, uiSelectConfig) {
 
   var ctrl = this;
