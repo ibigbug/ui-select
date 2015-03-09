@@ -12,6 +12,12 @@ uis.controller('uiSelectCtrl',
 
   var EMPTY_SEARCH = '';
 
+  //Standard input elements
+  ctrl.searchInput = $element.querySelectorAll('input.ui-select-search');
+  if (ctrl.searchInput.length !== 1) {
+    throw uiSelectMinErr('searchInput', "Expected 1 input.ui-select-search but got '{0}'.", ctrl.searchInput.length);
+  }
+
   ctrl.placeholder = uiSelectConfig.placeholder;
   ctrl.search = EMPTY_SEARCH;
   ctrl.activeIndex = 0;
@@ -39,11 +45,6 @@ uis.controller('uiSelectCtrl',
     return angular.isUndefined(ctrl.selected) || ctrl.selected === null || ctrl.selected === '';
   };
 
-  var _searchInput = $element.querySelectorAll('input.ui-select-search');
-  if (_searchInput.length !== 1) {
-    throw uiSelectMinErr('searchInput', "Expected 1 input.ui-select-search but got '{0}'.", _searchInput.length);
-  }
-
   // Most of the time the user does not want to empty the search input when in typeahead mode
   function _resetSearchInput() {
     if (ctrl.resetSearchInput || (ctrl.resetSearchInput === undefined && uiSelectConfig.resetSearchInput)) {
@@ -59,7 +60,7 @@ uis.controller('uiSelectCtrl',
   ctrl.activate = function(initSearchValue, avoidReset) {
     if (!ctrl.disabled  && !ctrl.open) {
       if(!avoidReset) _resetSearchInput();
-      ctrl.focusser.prop('disabled', true); //Will reactivate it on .close()
+      if (ctrl.focusser) ctrl.focusser.prop('disabled', true); //Will reactivate it on .close()
       ctrl.open = true;
       ctrl.activeMatchIndex = -1;
 
@@ -74,7 +75,7 @@ uis.controller('uiSelectCtrl',
       // Give it time to appear before focus
       $timeout(function() {
         ctrl.search = initSearchValue || ctrl.search;
-        _searchInput[0].focus();
+        ctrl.searchInput[0].focus();
       });
     }
   };
@@ -311,7 +312,7 @@ uis.controller('uiSelectCtrl',
 
   ctrl.setFocus = function(){
     if (!ctrl.focus && !ctrl.multiple) ctrl.focusser[0].focus();
-    if (!ctrl.focus && ctrl.multiple) _searchInput[0].focus();
+    if (!ctrl.focus && ctrl.multiple) ctrl.searchInput[0].focus();
   };
 
   ctrl.clear = function($event) {
@@ -373,8 +374,8 @@ uis.controller('uiSelectCtrl',
 
   var sizeWatch = null;
   ctrl.sizeSearchInput = function() {
-    var input = _searchInput[0],
-        container = _searchInput.parent().parent()[0],
+    var input = ctrl.searchInput[0],
+        container = ctrl.searchInput.parent().parent()[0],
         calculateContainerWidth = function() {
           // Return the container width only if the search input is visible
           return container.clientWidth * !!input.offsetParent;
@@ -385,11 +386,11 @@ uis.controller('uiSelectCtrl',
           }
           var inputWidth = containerWidth - input.offsetLeft - 10;
           if (inputWidth < 50) inputWidth = containerWidth;
-          _searchInput.css('width', inputWidth+'px');
+          ctrl.searchInput.css('width', inputWidth+'px');
           return true;
         };
 
-    _searchInput.css('width', '10px');
+    ctrl.searchInput.css('width', '10px');
     $timeout(function() { //Give tags time to render correctly
       if (sizeWatch === null && !updateIfVisible(calculateContainerWidth())) {
         sizeWatch = $scope.$watch(calculateContainerWidth, function(containerWidth) {
@@ -434,7 +435,7 @@ uis.controller('uiSelectCtrl',
 
   // Handles selected options in "multiple" mode
   function _handleMatchSelection(key){
-    var caretPosition = _getCaretPosition(_searchInput[0]),
+    var caretPosition = _getCaretPosition(ctrl.searchInput[0]),
         length = ctrl.selected.length,
         // none  = -1,
         first = 0,
@@ -493,7 +494,7 @@ uis.controller('uiSelectCtrl',
   }
 
   // Bind to keyboard shortcuts
-  _searchInput.on('keydown', function(e) {
+  ctrl.searchInput.on('keydown', function(e) {
 
     var key = e.which;
 
@@ -523,7 +524,7 @@ uis.controller('uiSelectCtrl',
           }
           if ( tagged ) {
             $timeout(function() {
-              _searchInput.triggerHandler('tagged');
+              ctrl.searchInput.triggerHandler('tagged');
               var newItem = ctrl.search.replace(KEY.MAP[e.keyCode],'').trim();
               if ( ctrl.tagging.fct ) {
                 newItem = ctrl.tagging.fct( newItem );
@@ -549,7 +550,7 @@ uis.controller('uiSelectCtrl',
   });
 
   // If tagging try to split by tokens and add items
-  _searchInput.on('paste', function (e) {
+  ctrl.searchInput.on('paste', function (e) {
     var data = e.originalEvent.clipboardData.getData('text/plain');
     if (data && data.length > 0 && ctrl.taggingTokens.isActivated && ctrl.tagging.fct) {
       var items = data.split(ctrl.taggingTokens.tokens[0]); // split by first token only
@@ -566,7 +567,7 @@ uis.controller('uiSelectCtrl',
     }
   });
 
-  _searchInput.on('keyup', function(e) {
+  ctrl.searchInput.on('keyup', function(e) {
     if ( ! KEY.isVerticalMovement(e.which) ) {
       $scope.$evalAsync( function () {
         ctrl.activeIndex = ctrl.taggingLabel === false ? -1 : 0;
@@ -670,13 +671,13 @@ uis.controller('uiSelectCtrl',
     }
   });
 
-  _searchInput.on('tagged', function() {
+  ctrl.searchInput.on('tagged', function() {
     $timeout(function() {
       _resetSearchInput();
     });
   });
 
-  _searchInput.on('blur', function() {
+  ctrl.searchInput.on('blur', function() {
     $timeout(function() {
       ctrl.activeMatchIndex = -1;
     });
@@ -753,6 +754,6 @@ uis.controller('uiSelectCtrl',
   }
 
   $scope.$on('$destroy', function() {
-    _searchInput.off('keyup keydown tagged blur paste');
+    ctrl.searchInput.off('keyup keydown tagged blur paste');
   });
 }]);
