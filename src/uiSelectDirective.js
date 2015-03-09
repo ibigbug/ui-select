@@ -17,7 +17,7 @@ uis.directive('uiSelect',
     controllerAs: '$select',
     compile: function(tElement, tAttrs) {
 
-      //Multiple or Single depending if multiple attribute presence multiple attribute found, then append uisMultiple directive
+      //Multiple or Single depending if multiple attribute presence
       if (angular.isDefined(tAttrs.multiple))
         tElement.append("<uis-multiple/>").removeAttr('multiple');
       else
@@ -71,8 +71,6 @@ uis.directive('uiSelect',
         attrs.$observe('disabled', function() {
           // No need to use $eval() (thanks to ng-disabled) since we already get a boolean instead of a string
           $select.disabled = attrs.disabled !== undefined ? attrs.disabled : false;
-          // As the search input field may now become visible, it may be necessary to recompute its size
-          $select.sizeSearchInput();
         });
 
         attrs.$observe('resetSearchInput', function() {
