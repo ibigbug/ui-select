@@ -1,0 +1,16 @@
+<span class="ui-select-match">
+  <span ng-repeat="$item in $select.selected">
+    <span 
+      btn="grey"
+      class="ui-select-match-item"
+      tabindex="-1"
+      type="button"
+      ng-disabled="$select.disabled"
+      ng-click="$select.activeMatchIndex = $index;"
+      ui-select-sort="$select.selected">
+        <!--ng-class="{'btn-primary':$select.activeMatchIndex === $index, 'select-locked':$select.isLocked(this, $index)}"-->
+        <!--<span class="close ui-select-match-close" ng-hide="$select.disabled" ng-click="$select.removeChoice($index)">&nbsp;&times;</span>-->
+        <span uis-transclude-append></span>
+    </span>
+  </span>
+</span>

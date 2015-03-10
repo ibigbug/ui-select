@@ -146,6 +146,9 @@ uis.controller('uiSelectCtrl',
       //Remove already selected items
       $scope.$watchCollection('$select.selected', function(selectedItems){
         var data = ctrl.parserResult.source($scope);
+        if (!ctrl.closeOnSelect) {  // Do not need re-calculate group, just update input size
+          return ctrl.sizeSearchInput();
+        }
         if (!selectedItems.length) {
           setItemsFn(data);
         }else{
@@ -221,6 +224,13 @@ uis.controller('uiSelectCtrl',
     return isDisabled;
   };
 
+  ctrl.isSelected = function(itemScope) {
+    if (!ctrl.open) return;
+    if (ctrl.multiple) {
+      return ctrl.selected.indexOf(itemScope[ctrl.itemProperty]) >= 0;
+    }
+  };
+
 
   // When the user selects an item with ENTER or clicks the dropdown
   ctrl.select = function(item, skipFocusser, $event) {
@@ -272,8 +282,17 @@ uis.controller('uiSelectCtrl',
         locals[ctrl.parserResult.itemName] = item;
 
         if(ctrl.multiple) {
-          ctrl.selected.push(item);
-          ctrl.sizeSearchInput();
+          if (ctrl.closeOnSelect) {
+            ctrl.selected.push(item);
+            ctrl.sizeSearchInput();
+          } else {
+            var index = ctrl.selected.indexOf(item);
+            if (index > -1) {
+              ctrl.removeChoice(index);
+            } else {
+              ctrl.selected.push(item);
+            }
+          }
         } else {
           ctrl.selected = item;
         }
@@ -383,8 +402,11 @@ uis.controller('uiSelectCtrl',
           if (containerWidth === 0) {
             return false;
           }
-          var inputWidth = containerWidth - input.offsetLeft - 10;
+          // TODO: why minus 10?
+          //var inputWidth = containerWidth - input.offsetLeft - 10;
+          var inputWidth = containerWidth - input.offsetLeft;
           if (inputWidth < 50) inputWidth = containerWidth;
+
           _searchInput.css('width', inputWidth+'px');
           return true;
         };
