@@ -1,7 +1,7 @@
 /*!
  * ui-select
  * http://github.com/angular-ui/ui-select
- * Version: 0.11.0 - 2015-03-09T00:55:08.444Z
+ * Version: 0.11.0 - 2015-03-13T09:51:00.266Z
  * License: MIT
  */
 
@@ -70,15 +70,15 @@
 /* Bootstrap theme */
 
 /* Helper class to show styles when focus */
-.btn-default-focus {
-  color: #333;
-  background-color: #EBEBEB;
-  border-color: #ADADAD;
-  text-decoration: none;
-  outline: 5px auto -webkit-focus-ring-color;
-  outline-offset: -2px;
-  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(102, 175, 233, 0.6);
-}
+/*.btn-default-focus {*/
+  /*color: #333;*/
+  /*background-color: #EBEBEB;*/
+  /*border-color: #ADADAD;*/
+  /*text-decoration: none;*/
+  /*outline: 5px auto -webkit-focus-ring-color;*/
+  /*outline-offset: -2px;*/
+  /*box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(102, 175, 233, 0.6);*/
+/*}*/
 
 .ui-select-bootstrap .ui-select-toggle {
   position: relative;
@@ -210,4 +210,108 @@
 /* Mark invalid Bootstrap */
 .ui-select-bootstrap.ng-dirty.ng-invalid > button.btn.ui-select-match {
     border-color: #D44950;
+}
+
+
+
+
+/* fc-select theme */
+.ui-select-fc {
+  position: relative;
+}
+.ui-select-fc .ui-select-toggle {
+  border-radius: 5px;
+  padding: 5px 5px 5px 10px;
+  width: 100%;
+  color: #ccc;
+}
+.ui-select-fc .dropdown-wrapper {
+  margin-top: 4px;
+  width: 100%;
+}
+.ui-select-fc .dropdown-wrapper .icon-search {
+  position: absolute;
+  right: 10px;
+  top: 14px;
+  width: 14px;
+  height: 14px;
+  line-height: 14px;
+}
+.ui-select-fc .ui-select-choices {
+  width: 100%;
+  height: auto;
+  max-height: 200px;
+  overflow-x: hidden;
+  margin: 0;
+}
+.ui-select-fc input {
+  margin-top: 0;
+}
+.ui-select-fc .ui-select-toggle > .caret {
+  position: absolute;
+  height: 10px;
+  top: 50%;
+  right: 10px;
+  margin-top: -2px;
+  color: #999;
+}
+.ui-select-fc .ui-select-toggle:hover:not([disabled]) > .caret {
+  color: #bcbcbc;
+}
+
+.ui-select-fc .ui-select-choices-row {
+  padding: 7px 10px;
+  line-height: 1;
+}
+.ui-select-fc .ui-select-choices-row.active {
+  background-color: #ebfaff;
+}
+.ui-select-fc .ui-select-choices-row a {
+  color: #666;
+}
+.ui-select-fc input[type="text"].ui-select-search,
+.ui-select-fc.ui-select-multiple input[type="text"].ui-select-search-box {
+  padding: 7px 24px 7px 5px;
+  margin-bottom: 7px;
+  box-shadow: none;
+  border: 1px solid #bcbcbc;
+}
+.ui-select-fc.ui-select-multiple {
+  min-height: 37px;
+  height: auto;
+  position: relative;
+}
+.ui-select-fc.ui-select-multiple input[type="text"].ui-select-search {
+  position: absolute;
+  padding: 0;
+  border: none;
+  height: auto;
+}
+.ui-select-fc.ui-select-multiple .ui-select-search:focus {
+  box-shadow: none;
+}
+.ui-select-fc .ui-select-match-text {
+  color: #666;
+}
+.ui-select-fc .ui-select-choices-group .dropdown-header {
+  padding: 10px;
+  color: #999;
+}
+.ui-select-fc .ui-select-choices-group .ui-select-choices-row {
+  padding: 10px 20px;
+}
+.ui-select-fc [disabled="disabled"] {
+  background-color: #f3f3f3;
+}
+.ui-select-fc [btn].ui-select-match-item {
+  margin-right: 5px;
+  padding: 1px 10px;
+}
+.ui-select-fc .ui-select-choices-check {
+  color: #2db7f5;
+  float: right;
+  display: none;
+}
+.ui-select-fc .selected .ui-select-choices-check {
+  display: inline;
 }

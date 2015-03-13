@@ -26,6 +26,12 @@ uis.directive('uiSelect',
       $select.focusserTitle = $select.baseTitle + ' focus';
       $select.focusserId = 'focusser-' + $select.generatedId;
 
+      $select.inline = angular.isDefined(attrs.inline) && (
+        attrs.inline === '' ||
+        attrs.inline.toLowerCase() === 'inline' ||
+        attrs.inline.toLowerCase() === 'true'
+      );
+
       $select.multiple = angular.isDefined(attrs.multiple) && (
           attrs.multiple === '' ||
           attrs.multiple.toLowerCase() === 'multiple' ||
@@ -208,6 +214,7 @@ uis.directive('uiSelect',
           $select.sortable = sortable !== undefined ? sortable : uiSelectConfig.sortable;
       });
 
+      attrs.disabled = attrs.disabled || false;
       attrs.$observe('disabled', function() {
         // No need to use $eval() (thanks to ng-disabled) since we already get a boolean instead of a string
         $select.disabled = attrs.disabled !== undefined ? attrs.disabled : false;

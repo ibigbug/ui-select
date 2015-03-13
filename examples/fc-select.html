@@ -55,6 +55,18 @@
       </div>
 
       <div col="8">
+        <p>Search Enabled</p>
+        <ui-select search-enabled="true" ng-model="person.selected" theme="fc-select">
+          <ui-select-match placeholder="Select or search a person in the list...">{{$select.selected.name}}</ui-select-match>
+          <ui-select-choices repeat="item in people | filter: $select.search">
+            <div ng-bind-html="item.name | highlight: $select.search"></div>
+            <small ng-bind-html="item.email | highlight: $select.search"></small>
+          </ui-select-choices>
+        </ui-select>
+
+      </div>
+
+      <div col="8">
         <p>Grouped</p>
         <ui-select ng-model="person.selected" theme="fc-select">
           <ui-select-match placeholder="Select or search a person in the list...">{{$select.selected.name}}</ui-select-match>

@@ -402,12 +402,25 @@ uis.controller('uiSelectCtrl',
           if (containerWidth === 0) {
             return false;
           }
-          // TODO: why minus 10?
-          //var inputWidth = containerWidth - input.offsetLeft - 10;
-          var inputWidth = containerWidth - input.offsetLeft;
-          if (inputWidth < 50) inputWidth = containerWidth;
+          // for left and right margin
+          var inputWidth = containerWidth - input.offsetLeft - 10;
+          //if (inputWidth < 50) inputWidth = containerWidth;
 
           _searchInput.css('width', inputWidth+'px');
+          _searchInput.css('marginLeft', '5px');
+          _searchInput.css('marginRight', '5px');
+
+          if (ctrl.multiple) {
+            _searchInput.css('marginLeft', 0);
+
+            var _searchInputBox = $element[0].querySelector('.ui-select-search-box');
+            if (_searchInputBox) {
+              _searchInputBox.style.marginLeft = '5px';
+              _searchInputBox.style.marginRight = '5px';
+              inputWidth = containerWidth - (_searchInputBox.offsetLeft || 5)- 5;
+              _searchInputBox.style.width = inputWidth + 'px';
+            }
+          }
           return true;
         };
 

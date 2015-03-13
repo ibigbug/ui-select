@@ -30,8 +30,8 @@ gulp.task('default', ['build','test']);
 gulp.task('build', ['scripts', 'styles']);
 gulp.task('test', ['build', 'karma']);
 
-gulp.task('watch', ['build','karma-watch'], function() {
-  gulp.watch(['src/**/*.{js,html}'], ['build']);
+gulp.task('watch', ['build'], function() {
+  gulp.watch(['src/**/*.{js,html}', 'src/common.css'], ['build']);
 });
 
 gulp.task('clean', function(cb) {

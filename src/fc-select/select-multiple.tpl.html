@@ -1,20 +1,37 @@
-<div input="text" class="ui-select-container ui-select-multiple ui-select-fc dropdown" ng-class="{open: $select.open}">
+<div input="text" class="ui-select-container ui-select-multiple ui-select-fc" ng-class="{open: $select.open}">
   <div>
     <div class="ui-select-match"></div>
-    <input type="text"
-           autocomplete="off" 
-           autocorrect="off" 
-           autocapitalize="off" 
-           spellcheck="false" 
-           class="ui-select-search input-xs"
-           placeholder="{{$select.getPlaceholder()}}"
-           ng-disabled="$select.disabled"
-           ng-hide="$select.disabled"
-           ng-click="$select.activate()"
-           ng-model="$select.search"
-           role="combobox"
-           aria-label="{{ $select.baseTitle }}"
-           ondrop="return false;">
+    <input 
+      ng-hide="$select.disabled || $select.open"
+      type="text"
+      autocomplete="off" 
+      autocorrect="off" 
+      autocapitalize="off" 
+      spellcheck="false" 
+      class="ui-select-search"
+      ng-disabled="$select.disabled"
+      ng-click="$select.activate()"
+      role="combobox"
+      aria-label="{{ $select.baseTitle }}"
+      ondrop="return false;">
   </div>
-  <div class="ui-select-choices"></div>
+  <div dropdown-menu class="dropdown-wrapper">
+    <input 
+      ng-show="$select.searchEnabled"
+      ng-if="!$select.inline"
+      type="text"
+      autocomplete="off" 
+      autocorrect="off" 
+      autocapitalize="off" 
+      spellcheck="false" 
+      class="ui-select-search-box input-xs"
+      ng-disabled="$select.disabled"
+      ng-click="$select.activate()"
+      ng-model="$select.search"
+      role="combobox"
+      aria-label="{{ $select.baseTitle }}"
+      ondrop="return false;">
+    <span ng-show="$select.searchEnabled" icon="search" class="icon-search"></span>
+    <div class="ui-select-choices"></div>
+  </div>
 </div>

@@ -88,7 +88,7 @@ var uis = angular.module('ui.select', [])
 
 .constant('uiSelectConfig', {
   theme: 'bootstrap',
-  searchEnabled: true,
+  searchEnabled: false,
   sortable: false,
   placeholder: '', // Empty by default, like HTML tag <select>
   refreshDelay: 1000, // In milliseconds

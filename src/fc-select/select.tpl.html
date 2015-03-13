@@ -1,13 +1,15 @@
-<div class="ui-select-container ui-select-fc dropdown" ng-class="{open: $select.open}">
+<div class="ui-select-container ui-select-fc" ng-class="{open: $select.open, 'select-focus': $select.focus}">
   <div class="ui-select-match"></div>
-  <input type="text" autocomplete="off" tabindex="-1"
-         aria-expanded="true"
-         aria-label="{{ $select.baseTitle }}"
-         aria-owns="ui-select-choices-{{ $select.generatedId }}"
-         aria-activedescendant="ui-select-choices-row-{{ $select.generatedId }}-{{ $select.activeIndex }}"
-         class="ui-select-search"
-         placeholder="{{$select.placeholder}}"
-         ng-model="$select.search"
-         ng-show="$select.searchEnabled && $select.open">
-  <div class="ui-select-choices"></div>
+  <div dropdown-menu class="dropdown-wrapper">
+    <input ng-show="$select.searchEnabled" type="text" autocomplete="off" tabindex="-1"
+      aria-expanded="true"
+      aria-label="{{ $select.baseTitle }}"
+      aria-owns="ui-select-choices-{{ $select.generatedId }}"
+      aria-activedescendant="ui-select-choices-row-{{ $select.generatedId }}-{{ $select.activeIndex }}"
+      class="ui-select-search"
+      ng-model="$select.search"
+      ng-show="$select.searchEnabled && $select.open">
+    <span ng-show="$select.searchEnabled" icon="search" class="icon-search"></span>
+    <div class="ui-select-choices"></div>
+  </div>
 </div>

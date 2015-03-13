@@ -208,26 +208,33 @@
 
 
 /* fc-select theme */
+.ui-select-fc {
+  position: relative;
+}
 .ui-select-fc .ui-select-toggle {
   border-radius: 5px;
   padding: 5px 5px 5px 10px;
   width: 100%;
   color: #ccc;
 }
-.ui-select-fc .ui-select-match [btn] {
-  text-align: left;
-  line-height: 1.5;
-  height: auto;
+.ui-select-fc .dropdown-wrapper {
+  margin-top: 4px;
+  width: 100%;
 }
-.ui-select-fc .ui-select-toggle:not([disabled]):hover {
-  color: #ccc;
+.ui-select-fc .dropdown-wrapper .icon-search {
+  position: absolute;
+  right: 10px;
+  top: 14px;
+  width: 14px;
+  height: 14px;
+  line-height: 14px;
 }
 .ui-select-fc .ui-select-choices {
   width: 100%;
   height: auto;
   max-height: 200px;
   overflow-x: hidden;
-  margin-top: 3px;
+  margin: 0;
 }
 .ui-select-fc input {
   margin-top: 0;
@@ -254,17 +261,23 @@
 .ui-select-fc .ui-select-choices-row a {
   color: #666;
 }
-.ui-select-fc .ui-select-search {
-  padding-top: 5px;
-  padding-bottom: 5px;
+.ui-select-fc input[type="text"].ui-select-search,
+.ui-select-fc.ui-select-multiple input[type="text"].ui-select-search-box {
+  padding: 7px 24px 7px 5px;
+  margin-bottom: 7px;
+  box-shadow: none;
+  border: 1px solid #bcbcbc;
 }
 .ui-select-fc.ui-select-multiple {
-  height: 37px;
+  min-height: 37px;
+  height: auto;
+  position: relative;
 }
-.ui-select-fc.ui-select-multiple .ui-select-search {
+.ui-select-fc.ui-select-multiple input[type="text"].ui-select-search {
   position: absolute;
   padding: 0;
   border: none;
+  height: auto;
 }
 .ui-select-fc.ui-select-multiple .ui-select-search:focus {
   box-shadow: none;
