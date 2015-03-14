@@ -26,12 +26,6 @@ uis.directive('uiSelect',
       $select.focusserTitle = $select.baseTitle + ' focus';
       $select.focusserId = 'focusser-' + $select.generatedId;
 
-      $select.inline = angular.isDefined(attrs.inline) && (
-        attrs.inline === '' ||
-        attrs.inline.toLowerCase() === 'inline' ||
-        attrs.inline.toLowerCase() === 'true'
-      );
-
       $select.multiple = angular.isDefined(attrs.multiple) && (
           attrs.multiple === '' ||
           attrs.multiple.toLowerCase() === 'multiple' ||
