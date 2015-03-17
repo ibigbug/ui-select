@@ -407,10 +407,12 @@ uis.controller('uiSelectCtrl',
             return false;
           }
           // a hack for dom reflow problem
-          if (!ctrl.selected.length) {
-            input.style.left = input.style.marginLeft;
-          } else {
-            input.style.left = 'auto';
+          if (ctrl.multiple) {
+            if (!ctrl.selected.length) {
+              input.style.left = input.style.marginLeft;
+            } else {
+              input.style.left = 'auto';
+            }
           }
           // for left and right margin
           var inputWidth = containerWidth - input.offsetLeft - 10;
