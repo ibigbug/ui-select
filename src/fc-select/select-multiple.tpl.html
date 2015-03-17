@@ -15,7 +15,7 @@
       aria-label="{{ $select.baseTitle }}"
       ondrop="return false;">
   </div>
-  <div ng-show="$select.items.length" dropdown-menu class="dropdown-wrapper">
+  <div ng-show="($select.items.length > 0) || ($select.searchEnabled && $select.open)" dropdown-menu class="dropdown-wrapper">
     <input 
       ng-show="$select.searchEnabled"
       ng-if="!$select.inline"
@@ -26,7 +26,6 @@
       spellcheck="false" 
       class="ui-select-search-box"
       ng-disabled="$select.disabled"
-      ng-click="$select.activate()"
       ng-model="$select.search"
       role="combobox"
       aria-label="{{ $select.baseTitle }}"

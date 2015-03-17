@@ -816,6 +816,6 @@ uis.controller('uiSelectCtrl',
   }
 
   $scope.$on('$destroy', function() {
-    _searchInput.off('keyup keydown tagged blur paste');
+    _searchInput.off('keyup keydown tagged blur paste input');
   });
 }]);
