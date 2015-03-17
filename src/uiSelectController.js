@@ -433,6 +433,7 @@ uis.controller('uiSelectCtrl',
           }
 
           if (ctrl.inline) {
+            $element[0].style.cursor = 'text';
             var _dropdown = $element[0].querySelector('.dropdown-wrapper');
             if (_dropdown) {
               _dropdown.style.width = 'auto';

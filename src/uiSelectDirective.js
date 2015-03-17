@@ -341,11 +341,23 @@ uis.directive('uiSelect',
         $select.clickTriggeredSelect = false;
       }
 
+      function onContainerClick(e) {
+        // emulate textarea behavior
+        if ($select.inline) {
+          e.preventDefault();
+          if ($document[0].activeElement && $document[0].activeElement === searchInput[0])
+            return;
+          searchInput[0].focus();
+        }
+      }
+
       // See Click everywhere but here event http://stackoverflow.com/questions/12931369
       $document.on('click', onDocumentClick);
+      element.on('click', onContainerClick);
 
       scope.$on('$destroy', function() {
         $document.off('click', onDocumentClick);
+        element.off('click', onContainerClick);
       });
 
       // Move transcluded elements to their correct position in main template
