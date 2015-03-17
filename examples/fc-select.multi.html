@@ -24,7 +24,6 @@
 
   <!-- ui-select files -->
   <script src="../dist/select.js"></script>
-  <link rel="stylesheet" href="../dist/select.css">
 
   <script src="demo.js"></script>
 
@@ -80,5 +79,13 @@
   <p>Selected: {{multipleDemo.selectedPeople}}</p>
 
 
+  <h3>Inline</h3>
+  <ui-select inline multiple ng-model="multipleDemo.colors" theme="fc-select" ng-disabled="disabled" title="Choose a color">
+    <ui-select-match placeholder="Select colors...">{{$item}}</ui-select-match>
+    <ui-select-choices repeat="color in availableColors | filter:$select.search">
+      {{color}}
+    </ui-select-choices>
+  </ui-select>
+  <p>Selected: {{multipleDemo.colors}}</p>
 </body>
 </html>

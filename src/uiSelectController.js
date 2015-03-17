@@ -310,6 +310,10 @@ uis.controller('uiSelectCtrl',
         if ($event && $event.type === 'click') {
           ctrl.clickTriggeredSelect = true;
         }
+
+        if (ctrl.inline) {
+          _searchInput.val('');
+        }
       }
     }
   };
@@ -402,6 +406,12 @@ uis.controller('uiSelectCtrl',
           if (containerWidth === 0) {
             return false;
           }
+          // a hack for dom reflow problem
+          if (!ctrl.selected.length) {
+            input.style.left = input.style.marginLeft;
+          } else {
+            input.style.left = 'auto';
+          }
           // for left and right margin
           var inputWidth = containerWidth - input.offsetLeft - 10;
           //if (inputWidth < 50) inputWidth = containerWidth;
@@ -411,14 +421,23 @@ uis.controller('uiSelectCtrl',
           _searchInput.css('marginRight', '5px');
 
           if (ctrl.multiple) {
-            _searchInput.css('marginLeft', 0);
-
+            _searchInput.css('marginLeft', ctrl.selected.length ? 0 : '5px');
             var _searchInputBox = $element[0].querySelector('.ui-select-search-box');
             if (_searchInputBox) {
               _searchInputBox.style.marginLeft = '5px';
               _searchInputBox.style.marginRight = '5px';
               inputWidth = containerWidth - (_searchInputBox.offsetLeft || 5)- 5;
               _searchInputBox.style.width = inputWidth + 'px';
+            }
+
+          }
+
+          if (ctrl.inline) {
+            var _dropdown = $element[0].querySelector('.dropdown-wrapper');
+            if (_dropdown) {
+              _dropdown.style.width = 'auto';
+              _dropdown.style.left = input.offsetLeft + 'px';
+              _dropdown.style.top = input.offsetTop + input.offsetHeight + 'px';
             }
           }
           return true;
@@ -715,6 +734,14 @@ uis.controller('uiSelectCtrl',
     $timeout(function() {
       ctrl.activeMatchIndex = -1;
     });
+  });
+
+  _searchInput.on('input', function() {
+    if (ctrl.inline) {
+      $scope.$apply(function() {
+        ctrl.search = _searchInput.val();
+      });
+    }
   });
 
   function _findCaseInsensitiveDupe(arr) {
