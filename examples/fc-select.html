@@ -17,9 +17,10 @@
       document.createElement('ui-select-choices');
     </script>
   <![endif]-->
+  <script src="//dev:9000/static/vendor/angular/angular.min.js"></script>
+  <script src="//dev:9000/static/vendor/angular-sanitize/angular-sanitize.min.js"></script>
+  <script src="//dev:9000/static/vendor/angular-animate/angular-animate.min.js"></script>
 
-  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular.js"></script>
-  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular-sanitize.js"></script>
   <link rel="stylesheet" href="http://dev:9000/dist/css/flaming-cloud-components.css">
 
   <!-- ui-select files -->
@@ -43,7 +44,7 @@
 
       <div col="8">
         <p>Default</p>
-        <ui-select ng-model="person.selected" theme="fc-select">
+        <ui-select animate ng-model="person.selected" theme="fc-select">
           <ui-select-match placeholder="Select or search a person in the list...">{{$select.selected.name}}</ui-select-match>
           <ui-select-choices repeat="item in people | filter: $select.search">
             <div ng-bind-html="item.name | highlight: $select.search"></div>

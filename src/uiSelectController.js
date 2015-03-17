@@ -5,8 +5,8 @@
  * put as much logic in the controller (instead of the link functions) as possible so it can be easily tested.
  */
 uis.controller('uiSelectCtrl',
-  ['$scope', '$element', '$timeout', '$filter', 'RepeatParser', 'uiSelectMinErr', 'uiSelectConfig',
-  function($scope, $element, $timeout, $filter, RepeatParser, uiSelectMinErr, uiSelectConfig) {
+  ['$scope', '$element', '$timeout', '$filter', 'RepeatParser', 'uiSelectMinErr', 'uiSelectConfig', '$animate',
+  function($scope, $element, $timeout, $filter, RepeatParser, uiSelectMinErr, uiSelectConfig, $animate) {
 
   var ctrl = this;
 
@@ -61,6 +61,7 @@ uis.controller('uiSelectCtrl',
       if(!avoidReset) _resetSearchInput();
       ctrl.focusser.prop('disabled', true); //Will reactivate it on .close()
       ctrl.open = true;
+      $animate.addClass($element[0].querySelector('.dropdown-wrapper'), 'fade');
       ctrl.activeMatchIndex = -1;
 
       ctrl.activeIndex = ctrl.activeIndex >= ctrl.items.length ? 0 : ctrl.activeIndex;
@@ -321,15 +322,18 @@ uis.controller('uiSelectCtrl',
   // Closes the dropdown
   ctrl.close = function(skipFocusser) {
     if (!ctrl.open) return;
+    ctrl.$$animating = true;
     if (ctrl.ngModel && ctrl.ngModel.$setTouched) ctrl.ngModel.$setTouched();
     _resetSearchInput();
     ctrl.open = false;
+
     if (!ctrl.multiple){
       $timeout(function(){
         ctrl.focusser.prop('disabled', false);
         if (!skipFocusser) ctrl.focusser[0].focus();
       },0,false);
     }
+
   };
 
   ctrl.setFocus = function(){

@@ -84,7 +84,7 @@ if (angular.element.prototype.closest === undefined) {
 
 var latestId = 0;
 
-var uis = angular.module('ui.select', [])
+var uis = angular.module('ui.select', ['ngAnimate'])
 
 .constant('uiSelectConfig', {
   theme: 'bootstrap',
