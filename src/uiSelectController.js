@@ -61,7 +61,7 @@ uis.controller('uiSelectCtrl',
       if(!avoidReset) _resetSearchInput();
       ctrl.focusser.prop('disabled', true); //Will reactivate it on .close()
       ctrl.open = true;
-      $animate.addClass($element[0].querySelector('.dropdown-wrapper'), 'fade');
+      $animate.addClass($element[0].querySelector('.dropdown-wrapper'), 'slide-up');
       ctrl.activeMatchIndex = -1;
 
       ctrl.activeIndex = ctrl.activeIndex >= ctrl.items.length ? 0 : ctrl.activeIndex;
