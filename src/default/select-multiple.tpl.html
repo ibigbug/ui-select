@@ -1,0 +1,32 @@
+<div class="ui-select-container ui-select-multiple fc-select fc-select-container fc-select-container-multi"
+     ng-class="{'fc-select-container-active fc-select-dropdown-open open': $select.open,
+                'fc-select-container-disabled': $select.disabled}">
+  <ul class="fc-select-choices">
+    <span class="ui-select-match"></span>
+    <li class="fc-select-search-field">
+      <input
+        type="text"
+        autocomplete="off"
+        autocorrect="off"
+        autocapitalize="off"
+        spellcheck="false"
+        role="combobox"
+        aria-expanded="true"
+        aria-owns="ui-select-choices-{{ $select.generatedId }}"
+        aria-label="{{ $select.baseTitle }}"
+        aria-activedescendant="ui-select-choices-row-{{ $select.generatedId }}-{{ $select.activeIndex }}"
+        class="fc-select-input ui-select-search"
+        placeholder="{{$selectMultiple.getPlaceholder()}}"
+        ng-disabled="$select.disabled"
+        ng-hide="$select.disabled"
+        ng-model="$select.search"
+        ng-click="$select.activate()"
+        style="width: 34px;"
+        ondrop="return false;">
+    </li>
+  </ul>
+  <div class="ui-select-dropdown fc-select-drop fc-select-with-searchbox fc-select-drop-active"
+       ng-class="{'fc-select-display-none': !$select.open}">
+    <div class="ui-select-choices"></div>
+  </div>
+</div>
