@@ -1,7 +1,7 @@
 /*!
  * ui-select
  * http://github.com/angular-ui/ui-select
- * Version: 0.12.0 - 2015-06-22T08:11:59.966Z
+ * Version: 0.12.0 - 2015-06-23T04:13:25.049Z
  * License: MIT
  */
 
@@ -91,6 +91,17 @@
   box-shadow: none;
 }
 
+.fc-select-search [icon] {
+  position: absolute;
+  right: 12px;
+  top: 12px;
+  width: 14px;
+  height: 14px;
+  font-size: 14px;
+  line-height: 1;
+  color: #666;
+}
+
 .fc-select-results {
   max-height: 200px;
   position: relative;
@@ -105,4 +116,31 @@
 
 .fc-select-results .fc-select-highlighted {
   background: #ebfaff;
+}
+
+
+.fc-select-container-multi .fc-select-choices {
+  min-height: 26px;
+  height: auto !important;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  border: 1px solid #d9d9d9;
+  cursor: text;
+  overflow: hidden;
+  background: #fff;
+}
+
+.fc-select-container-multi .fc-select-choices .fc-select-search-choice {
+  position: relative;
+  display: inline-block;
+  margin-left: 4px;
+  padding: 2px 8px;
+  background-color: #efeff0;
+  color: #808080;
+  border-radius: 3px;
+}
+
+.fc-select-container-multi .fc-select-choices .fc-select-search-choice-focus {
+  background-color: rgba(0, 0, 0, .15);
 }
