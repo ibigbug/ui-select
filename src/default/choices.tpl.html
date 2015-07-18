@@ -3,8 +3,9 @@
     <div ng-show="$select.choiceGrouped($group)" class="ui-select-choices-group-label fc-select-result-label" ng-bind="$group.name"></div>
     <ul role="listbox"
       id="ui-select-choices-{{ $select.generatedId }}" ng-class="{'fc-select-result-sub': $select.choiceGrouped($group), 'fc-select-result-single': !$select.choiceGrouped($group) }">
-      <li role="option" id="ui-select-choices-row-{{ $select.generatedId }}-{{$index}}" class="ui-select-choices-row" ng-class="{'fc-select-highlighted': $select.isActive(this), 'fc-select-disabled': $select.isDisabled(this)}">
+      <li role="option" id="ui-select-choices-row-{{ $select.generatedId }}-{{$index}}" class="ui-select-choices-row" ng-class="{'fc-select-highlighted': $select.isActive(this), 'fc-select-disabled': $select.isDisabled(this), 'fc-selected': $select.isSelected(this)}">
         <div class="fc-select-result-label ui-select-choices-row-inner"></div>
+        <span href="javascript:void(0)" class="ui-select-choices-check" icon="check"></span>
       </li>
     </ul>
   </li>

@@ -237,6 +237,14 @@ uis.controller('uiSelectCtrl',
     return isDisabled;
   };
 
+  ctrl.isSelected = function(itemScope) {
+    if (!ctrl.open) return;
+
+    var item = itemScope[ctrl.itemProperty];
+    if (!item) return;
+    return ctrl.selected.indexOf(item) > -1;
+  };
+
 
   // When the user selects an item with ENTER or clicks the dropdown
   ctrl.select = function(item, skipFocusser, $event) {

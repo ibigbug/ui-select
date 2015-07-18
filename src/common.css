@@ -239,6 +239,17 @@
 
 .fc-select-results .ui-select-choices-row {
   padding: 10px 20px;
+  position: relative;
+}
+
+.fc-select-results .ui-select-choices-check {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display: none;
+}
+.ui-select-choices-row.fc-selected .ui-select-choices-check {
+  display: inline;
 }
 
 .fc-select-results .fc-select-highlighted {
