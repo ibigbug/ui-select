@@ -1,146 +1,477 @@
 /*!
  * ui-select
  * http://github.com/angular-ui/ui-select
- * Version: 0.12.0 - 2015-06-23T04:13:25.049Z
- * License: MIT
- */
-
-
-/*!
- * ui-select
- * http://github.com/angular-ui/ui-select
- * Version: 0.11.0 - 2015-03-13T09:51:00.266Z
+ * Version: 0.12.0 - 2015-07-18T09:06:46.399Z
  * License: MIT
  */
 
 
 .fc-select-container {
-  margin: 0;
-  position: relative;
-  display: inline-block;
-  zoom: 1;
-  vertical-align: middle;
+    margin: 0;
+    position: relative;
+    display: inline-block;
+    /* inline-block for ie7 */
+    zoom: 1;
+    *display: inline;
+    vertical-align: middle;
 }
 
-.fc-select-display-none {
-  display: none;
-}
+.fc-select-container,
+.fc-select-drop,
+.fc-select-search,
+.fc-select-search input {
+  /*
+    Force border-box so that % widths fit the parent
+    container without overlap because of margin/padding.
 
-.fc-select > .fc-select-choice.ui-select-match {
-  height: 29px;
+    More Info : http://www.quirksmode.org/css/box.html
+  */
+  -webkit-box-sizing: border-box; /* webkit */
+     -moz-box-sizing: border-box; /* firefox */
+          box-sizing: border-box; /* css3 */
 }
 
 .fc-select-container .fc-select-choice {
-  display: block;
-  padding: 0 0 0 9px;
-  overflow: hidden;
-  position: relative;
-  border: 1px solid #d9d9d9;
-  border-radius: 4px;
-  white-space: nowrap;
-  line-height: 29px;
-  color: #ccc;
-  text-decoration: none;
-  background-color: #fff;
+    display: block;
+    overflow: hidden;
+    position: relative;
+    color: #666;
+
+    white-space: nowrap;
+    text-decoration: none;
+
+    border-radius: 6px;
+    border: 1px solid #d9d9d9;
+    height: 32px;
+    line-height: 32px;
+    padding: 0 10px;
+
+
+    -webkit-touch-callout: none;
+      -webkit-user-select: none;
+         -moz-user-select: none;
+          -ms-user-select: none;
+              user-select: none;
 }
 
-.fc-select-default: {
-  color: #999;
+.fc-select-container .fc-select-choice:hover {
+  border-color: #3fc7fa;
+}
+
+.fc-select-container.fc-select-allowclear .fc-select-choice .fc-select-chosen {
+    margin-right: 42px;
 }
 
 .fc-select-container .fc-select-choice > .fc-select-chosen {
-  display: block;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
+    margin-right: 26px;
+    display: block;
+    overflow: hidden;
+
+    white-space: nowrap;
+
+    text-overflow: ellipsis;
+}
+
+.fc-select-container .fc-select-choice abbr {
+    display: none;
+    width: 12px;
+    height: 12px;
+    position: absolute;
+    right: 24px;
+    top: 8px;
+
+    font-size: 1px;
+    text-decoration: none;
+
+    border: 0;
+    background: url('fc-select.png') right top no-repeat;
+    cursor: pointer;
+    outline: 0;
+}
+
+.fc-select-container.fc-select-allowclear .fc-select-choice abbr {
+    display: inline-block;
+}
+
+.fc-select-container .fc-select-choice abbr:hover {
+    background-position: right -11px;
+    cursor: pointer;
+}
+
+.fc-select-drop-mask {
+    border: 0;
+    margin: 0;
+    padding: 0;
+    position: fixed;
+    left: 0;
+    top: 0;
+    min-height: 100%;
+    min-width: 100%;
+    height: auto;
+    width: auto;
+    opacity: 0;
+    z-index: 9998;
+    /* styles required for IE to work */
+    background-color: #fff;
+    filter: alpha(opacity=0);
 }
 
 .fc-select-drop {
-  position: absolute;
-  width: 100%;
-  top: 100%;
-  left: 0;
-  z-index: 1000;
-  min-width: 90px;
-  margin-top: 3px;
-  list-style: none;
-  font-size: 12px;
-  text-align: left;
-  background-color: #fff;
-  border-radius: 3px;
-  box-shadow: 0 1px 5px #ccc;
-  background-clip: padding-box;
-  border: 1px solid #ccc;
+    width: 100%;
+    margin-top: 3px;
+    position: absolute;
+    z-index: 9999;
+    top: 100%;
+
+    background: #fff;
+    border: 1px solid #ccc;
+    border-top: 0;
+
+    border-radius: 6px;
+
+    box-shadow: 0 4px 5px rgba(0, 0, 0, .15);
+}
+
+.fc-select-drop-auto-width {
+    border-top: 1px solid #aaa;
+    width: auto;
+}
+
+.fc-select-drop-auto-width .fc-select-search {
+    padding-top: 4px;
+}
+
+.fc-select-drop.fc-select-drop-above {
+    margin-top: 1px;
+    border-top: 1px solid #aaa;
+    border-bottom: 0;
+
+    border-radius: 4px 4px 0 0;
+
 }
 
 
+.fc-select-container .fc-select-choice .fc-select-arrow {
+    display: inline-block;
+    width: 28px;
+    height: 100%;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+.fc-select-container .fc-select-choice .fc-select-arrow b {
+    display: block;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.3s ease-in-out;
+}
+
 .fc-select-search {
-  padding: 5px;
+    display: inline-block;
+    width: 100%;
+    min-height: 26px;
+    margin: 0;
+    padding-left: 4px;
+    padding-right: 4px;
+
+    position: relative;
+    z-index: 10000;
+
+    white-space: nowrap;
 }
 
 .fc-select-search input {
-  width: 100%;
-  height: auto !important;
-  min-height: 26px;
-  padding: 3px 32px 7px 10px;
-  outline: 0;
-  font-family: sans-serif;
-  font-size: 1em;
-  border: 1px solid #d9d9d9;
-  border-radius: 4px;
-  box-shadow: none;
+    width: 100%;
+    height: auto !important;
+    min-height: 26px;
+    padding: 4px 20px 4px 5px;
+    margin: 0;
+
+    outline: 0;
+    font-family: sans-serif;
+    font-size: 1em;
+
+    border: 1px solid #aaa;
+    border-radius: 0;
+
+    -webkit-box-shadow: none;
+            box-shadow: none;
+
 }
 
-.fc-select-search [icon] {
-  position: absolute;
-  right: 12px;
-  top: 12px;
-  width: 14px;
-  height: 14px;
-  font-size: 14px;
-  line-height: 1;
-  color: #666;
+.fc-select-drop.fc-select-drop-above .fc-select-search input {
+    margin-top: 4px;
 }
 
+
+
+.fc-select-dropdown-open .fc-select-choice .fc-select-arrow b {
+  transform: rotate(270deg);
+}
+
+/* results */
 .fc-select-results {
-  max-height: 200px;
-  position: relative;
-  overflow-x: hidden;
-  overflow-y: auto;
+    max-height: 200px;
+    position: relative;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.fc-select-results ul.fc-select-result-sub {
+    margin: 0;
+    padding-left: 0;
+}
+
+.fc-select-results li {
+    list-style: none;
+    display: list-item;
+    cursor: pointer;
+}
+
+.fc-select-results li.fc-select-result-with-children > .fc-select-result-label {
+    font-weight: bold;
 }
 
 .fc-select-results .fc-select-result-label {
+    margin: 0;
+    cursor: pointer;
+
+    min-height: 1em;
+
+    -webkit-touch-callout: none;
+      -webkit-user-select: none;
+         -moz-user-select: none;
+          -ms-user-select: none;
+              user-select: none;
+}
+
+.fc-select-results .ui-select-choices-row {
   padding: 10px 20px;
-  cursor: pointer;
 }
 
 .fc-select-results .fc-select-highlighted {
-  background: #ebfaff;
+    background: #f4fcff;
+}
+
+.fc-select-results li em {
+    background: #feffde;
+    font-style: normal;
+}
+
+.fc-select-results .fc-select-highlighted em {
+    background: transparent;
+}
+
+.fc-select-results .fc-select-highlighted ul {
+    background: #fff;
+    color: #000;
 }
 
 
+.fc-select-results .fc-select-no-results,
+.fc-select-results .fc-select-searching,
+.fc-select-results .fc-select-selection-limit {
+    background: #f4f4f4;
+    display: list-item;
+}
+
+/*
+disabled look for disabled choices in the results dropdown
+*/
+.fc-select-results .fc-select-disabled.fc-select-highlighted {
+    color: #666;
+    background: #f4f4f4;
+    display: list-item;
+    cursor: default;
+}
+.fc-select-results .fc-select-disabled {
+  background: #f4f4f4;
+  display: list-item;
+  cursor: default;
+}
+
+.fc-select-results .fc-select-selected {
+    display: none;
+}
+
+
+.fc-select-more-results {
+    background: #f4f4f4;
+    display: list-item;
+}
+
+/* disabled styles */
+
+.fc-select-container.fc-select-container-disabled .fc-select-choice {
+    background-color: #f4f4f4;
+    border: 1px solid #ddd;
+    cursor: default;
+}
+
+.fc-select-container.fc-select-container-disabled .fc-select-choice .fc-select-arrow {
+    background-color: #f4f4f4;
+    border-left: 0;
+}
+
+
+
+/* multiselect */
+
 .fc-select-container-multi .fc-select-choices {
-  min-height: 26px;
-  height: auto !important;
-  margin: 0;
-  padding: 0;
-  position: relative;
-  border: 1px solid #d9d9d9;
-  cursor: text;
-  overflow: hidden;
-  background: #fff;
+    height: auto !important;
+    height: 1%;
+    margin: 0;
+    padding: 0;
+    position: relative;
+
+    border: 1px solid #aaa;
+    cursor: text;
+    overflow: hidden;
+
+    background-color: #fff;
+}
+
+.fc-select-locked {
+  padding: 3px 5px 3px 5px !important;
+}
+
+.fc-select-container-multi .fc-select-choices {
+    min-height: 26px;
+}
+
+.fc-select-container-multi .fc-select-choices li {
+    float: left;
+    list-style: none;
+}
+.fc-select-container-multi .fc-select-choices .fc-select-search-field {
+    margin: 0;
+    padding: 0;
+    white-space: nowrap;
+}
+
+.fc-select-container-multi .fc-select-choices .fc-select-search-field input {
+    padding: 5px;
+    margin: 1px 0;
+
+    font-family: sans-serif;
+    font-size: 100%;
+    color: #666;
+    outline: 0;
+    border: 0;
+    -webkit-box-shadow: none;
+            box-shadow: none;
+    background: transparent !important;
+}
+
+.fc-select-default {
+    color: #999 !important;
 }
 
 .fc-select-container-multi .fc-select-choices .fc-select-search-choice {
-  position: relative;
-  display: inline-block;
-  margin-left: 4px;
-  padding: 2px 8px;
-  background-color: #efeff0;
-  color: #808080;
-  border-radius: 3px;
+    padding: 3px 5px 3px 18px;
+    margin: 3px 0 3px 5px;
+    position: relative;
+
+    line-height: 13px;
+    color: #333;
+    cursor: default;
+    border: 1px solid #aaaaaa;
+
+    border-radius: 3px;
+
+    -webkit-box-shadow: 0 0 2px #fff inset, 0 1px 0 rgba(0, 0, 0, 0.05);
+            box-shadow: 0 0 2px #fff inset, 0 1px 0 rgba(0, 0, 0, 0.05);
+
+    background-clip: padding-box;
+
+    -webkit-touch-callout: none;
+      -webkit-user-select: none;
+         -moz-user-select: none;
+          -ms-user-select: none;
+              user-select: none;
+
+    background-color: #e4e4e4;
+}
+.fc-select-container-multi .fc-select-choices .fc-select-search-choice .fc-select-chosen {
+    cursor: default;
+}
+.fc-select-container-multi .fc-select-choices .fc-select-search-choice-focus {
+    background: #d4d4d4;
 }
 
-.fc-select-container-multi .fc-select-choices .fc-select-search-choice-focus {
-  background-color: rgba(0, 0, 0, .15);
+.fc-select-search-choice-close {
+    display: block;
+    width: 12px;
+    height: 13px;
+    position: absolute;
+    right: 3px;
+    top: 4px;
+
+    font-size: 1px;
+    outline: none;
+    background: url('fc-select.png') right top no-repeat;
 }
+
+.fc-select-container-multi .fc-select-search-choice-close {
+    left: 3px;
+}
+
+.fc-select-container-multi .fc-select-choices .fc-select-search-choice .fc-select-search-choice-close:hover {
+  background-position: right -11px;
+}
+.fc-select-container-multi .fc-select-choices .fc-select-search-choice-focus .fc-select-search-choice-close {
+    background-position: right -11px;
+}
+
+/* disabled styles */
+.fc-select-container-multi.fc-select-container-disabled .fc-select-choices {
+    background-color: #f4f4f4;
+    border: 1px solid #ddd;
+    cursor: default;
+}
+
+.fc-select-container-multi.fc-select-container-disabled .fc-select-choices .fc-select-search-choice {
+    padding: 3px 5px 3px 5px;
+    border: 1px solid #ddd;
+    background-color: #f4f4f4;
+}
+
+.fc-select-container-multi.fc-select-container-disabled .fc-select-choices .fc-select-search-choice .fc-select-search-choice-close {    display: none;
+    background: none;
+}
+/* end multiselect */
+
+
+.fc-select-result-selectable .fc-select-match,
+.fc-select-result-unselectable .fc-select-match {
+    text-decoration: underline;
+}
+
+.fc-select-offscreen, .fc-select-offscreen:focus {
+    clip: rect(0 0 0 0) !important;
+    width: 1px !important;
+    height: 1px !important;
+    border: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+    position: absolute !important;
+    outline: 0 !important;
+    left: 0px !important;
+    top: 0px !important;
+}
+
+.fc-select-display-none {
+    display: none;
+}
+
+.fc-select-measure-scrollbar {
+    position: absolute;
+    top: -10000px;
+    left: -10000px;
+    width: 100px;
+    height: 100px;
+    overflow: scroll;
+}
+
