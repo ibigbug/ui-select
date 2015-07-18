@@ -76,7 +76,6 @@
     text-decoration: none;
 
     border: 0;
-    background: url('fc-select.png') right top no-repeat;
     cursor: pointer;
     outline: 0;
 }
@@ -317,9 +316,10 @@ disabled look for disabled choices in the results dropdown
     padding: 0;
     position: relative;
 
-    border: 1px solid #aaa;
     cursor: text;
     overflow: hidden;
+    border-radius: 6px;
+    border: 1px solid #d9d9d9;
 
     background-color: #fff;
 }
@@ -361,29 +361,14 @@ disabled look for disabled choices in the results dropdown
 }
 
 .fc-select-container-multi .fc-select-choices .fc-select-search-choice {
-    padding: 3px 5px 3px 18px;
-    margin: 3px 0 3px 5px;
-    position: relative;
-
-    line-height: 13px;
-    color: #333;
-    cursor: default;
-    border: 1px solid #aaaaaa;
-
-    border-radius: 3px;
-
-    -webkit-box-shadow: 0 0 2px #fff inset, 0 1px 0 rgba(0, 0, 0, 0.05);
-            box-shadow: 0 0 2px #fff inset, 0 1px 0 rgba(0, 0, 0, 0.05);
-
-    background-clip: padding-box;
-
-    -webkit-touch-callout: none;
-      -webkit-user-select: none;
-         -moz-user-select: none;
-          -ms-user-select: none;
-              user-select: none;
-
-    background-color: #e4e4e4;
+  margin-top: 3px;
+  position: relative;
+  display: inline-block;
+  margin-left: 4px;
+  padding: 2px 18px 2px 8px;;
+  background-color: #efeff0;
+  color: #808080;
+  border-radius: 3px;
 }
 .fc-select-container-multi .fc-select-choices .fc-select-search-choice .fc-select-chosen {
     cursor: default;
@@ -398,16 +383,17 @@ disabled look for disabled choices in the results dropdown
     height: 13px;
     position: absolute;
     right: 3px;
-    top: 4px;
+    top: 1px;
 
-    font-size: 1px;
+    font-size: 14px;
     outline: none;
-    background: url('fc-select.png') right top no-repeat;
+    color: #aaa;
 }
 
-.fc-select-container-multi .fc-select-search-choice-close {
-    left: 3px;
+.fc-select-search-choice-close:hover {
+  color: #ccc;
 }
+
 
 .fc-select-container-multi .fc-select-choices .fc-select-search-choice .fc-select-search-choice-close:hover {
   background-position: right -11px;
