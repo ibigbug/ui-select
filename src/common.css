@@ -116,7 +116,6 @@
 
     background: #fff;
     border: 1px solid #ccc;
-    border-top: 0;
 
     border-radius: 6px;
 
@@ -247,6 +246,10 @@
   top: 10px;
   right: 10px;
   display: none;
+  color: #2db7f5;
+}
+.ui-select-choices-row.fc-selected {
+  background-color: #daf5ff;
 }
 .ui-select-choices-row.fc-selected .ui-select-choices-check {
   display: inline;
@@ -293,9 +296,6 @@ disabled look for disabled choices in the results dropdown
   cursor: default;
 }
 
-.fc-select-results .fc-select-selected {
-    display: none;
-}
 
 
 .fc-select-more-results {
@@ -333,6 +333,10 @@ disabled look for disabled choices in the results dropdown
     border: 1px solid #d9d9d9;
 
     background-color: #fff;
+}
+
+.fc-select-container-multi[inline] .fc-select-choices {
+  min-height: 150px;
 }
 
 .fc-select-locked {

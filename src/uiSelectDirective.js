@@ -63,6 +63,11 @@ uis.directive('uiSelect',
             $select.searchEnabled = searchEnabled !== undefined ? searchEnabled : uiSelectConfig.searchEnabled;
         });
 
+        scope.$watch('inline', function() {
+          var inline = scope.$eval(attrs.inline);
+          $select.inline = inline !== undefined ? inline : attrs.inline === '' ? true : uiSelectConfig.inline;
+        });
+
         scope.$watch('sortable', function() {
             var sortable = scope.$eval(attrs.sortable);
             $select.sortable = sortable !== undefined ? sortable : uiSelectConfig.sortable;
@@ -155,11 +160,28 @@ uis.directive('uiSelect',
           $select.clickTriggeredSelect = false;
         }
 
+
+
+        function onContainerClick(e) {
+          // emulate textarea behavior
+          if ($select.multiple) {
+            if (e.target === tElement[0].querySelector('.fc-select-choices') || e.target === $select.searchInput[0]) {
+              if (!$select.open) {
+                $select.activate();
+              }
+            }
+          }
+        }
+
+
         // See Click everywhere but here event http://stackoverflow.com/questions/12931369
         $document.on('click', onDocumentClick);
+        tElement.on('click', onContainerClick);
+
 
         scope.$on('$destroy', function() {
           $document.off('click', onDocumentClick);
+          tElement.off('click', onContainerClick);
         });
 
         // Move transcluded elements to their correct position in main template
@@ -231,6 +253,8 @@ uis.directive('uiSelect',
           element[0].style.left = offset.left + 'px';
           element[0].style.top = offset.top + 'px';
           element[0].style.width = offset.width + 'px';
+
+
         }
 
         function resetDropdown() {
@@ -266,15 +290,27 @@ uis.directive('uiSelect',
 
             // Delay positioning the dropdown until all choices have been added so its height is correct.
             $timeout(function(){
-              var offset = uisOffset(element);
-              var offsetDropdown = uisOffset(dropdown);
+              //var offset = uisOffset(element);
+              //var offsetDropdown = uisOffset(dropdown);
 
               // Determine if the direction of the dropdown needs to be changed.
-              if (offset.top + offset.height + offsetDropdown.height > $document[0].documentElement.scrollTop + $document[0].documentElement.clientHeight) {
-                dropdown[0].style.position = 'absolute';
-                dropdown[0].style.top = (offsetDropdown.height * -1) + 'px';
-                element.addClass(directionUpClassName);
+              // Always slideDown
+              /*
+               *if (offset.top + offset.height + offsetDropdown.height > $document[0].documentElement.scrollTop + $document[0].documentElement.clientHeight) {
+               *  dropdown[0].style.position = 'absolute';
+               *  dropdown[0].style.top = (offsetDropdown.height * -1) + 'px';
+               *  element.addClass(directionUpClassName);
+               *}
+               */
+
+              if ($select.inline) {
+                element[0].style.cursor = 'text';
+                var input = $select.searchInput[0];
+                dropdown[0].style.width = 'auto';
+                dropdown[0].style.left = input.offsetLeft + 'px';
+                dropdown[0].style.top = input.offsetTop + input.offsetHeight + 'px';
               }
+
 
               // Display the dropdown once it has been positioned.
               dropdown[0].style.visibility = '';
