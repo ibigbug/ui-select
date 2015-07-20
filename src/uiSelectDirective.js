@@ -63,11 +63,6 @@ uis.directive('uiSelect',
             $select.searchEnabled = searchEnabled !== undefined ? searchEnabled : uiSelectConfig.searchEnabled;
         });
 
-        scope.$watch('inline', function() {
-          var inline = scope.$eval(attrs.inline);
-          $select.inline = inline !== undefined ? inline : attrs.inline === '' ? true : uiSelectConfig.inline;
-        });
-
         scope.$watch('sortable', function() {
             var sortable = scope.$eval(attrs.sortable);
             $select.sortable = sortable !== undefined ? sortable : uiSelectConfig.sortable;
@@ -83,6 +78,13 @@ uis.directive('uiSelect',
           var resetSearchInput = scope.$eval(attrs.resetSearchInput);
           $select.resetSearchInput = resetSearchInput !== undefined ? resetSearchInput : true;
         });
+
+        attrs.$observe('inline', function() {
+          var inline = scope.$eval(attrs.inline);
+          $select.inline = inline !== undefined ? inline : attrs.inline === '' ? true : uiSelectConfig.inline;
+          $select.removeSelected = $select.multiple && $select.inline;
+        });
+
 
         attrs.$observe('tagging', function() {
           if(attrs.tagging !== undefined)

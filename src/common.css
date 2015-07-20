@@ -220,7 +220,10 @@
 }
 
 .fc-select-results li.fc-select-result-with-children > .fc-select-result-label {
-    font-weight: bold;
+    color: #999;
+    line-height: 1.5;
+    padding: 8px 10px;
+    border-bottom: 1px solid #dedede;
 }
 
 .fc-select-results .fc-select-result-label {

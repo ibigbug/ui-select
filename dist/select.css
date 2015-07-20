@@ -1,7 +1,7 @@
 /*!
  * ui-select
  * http://github.com/angular-ui/ui-select
- * Version: 0.12.0 - 2015-07-18T12:55:52.101Z
+ * Version: 0.12.0 - 2015-07-20T06:31:45.015Z
  * License: MIT
  */
 
@@ -228,7 +228,10 @@
 }
 
 .fc-select-results li.fc-select-result-with-children > .fc-select-result-label {
-    font-weight: bold;
+    color: #999;
+    line-height: 1.5;
+    padding: 8px 10px;
+    border-bottom: 1px solid #dedede;
 }
 
 .fc-select-results .fc-select-result-label {
