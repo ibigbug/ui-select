@@ -240,9 +240,11 @@ uis.controller('uiSelectCtrl',
   ctrl.isSelected = function(itemScope) {
     if (!ctrl.open) return;
 
-    var item = itemScope[ctrl.itemProperty];
-    if (!item) return;
-    return ctrl.selected.indexOf(item) > -1;
+    if (ctrl.multiple) {
+      var item = itemScope[ctrl.itemProperty];
+      if (!item) return;
+      return ctrl.selected.indexOf(item) > -1;
+    }
   };
 
 

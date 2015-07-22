@@ -280,7 +280,13 @@ uis.directive('uiSelect',
             directionUpClassName = 'direction-up';
 
         // Support changing the direction of the dropdown if there isn't enough space to render it.
-        scope.$watch('$select.open', function(isOpen) {
+        scope.$watch('$select.open', repositionDropdown);
+        scope.$watch('$select.selected.length', function() {
+          if ($select.inline) {
+            repositionDropdown($select.open);
+          }
+        });
+        function repositionDropdown(isOpen) {
           if (isOpen) {
             dropdown = angular.element(element).querySelectorAll('.ui-select-dropdown');
             if (dropdown === null) {
@@ -327,7 +333,7 @@ uis.directive('uiSelect',
               dropdown[0].style.top = '';
               element.removeClass(directionUpClassName);
           }
-        });
+        }
       };
     }
   };
