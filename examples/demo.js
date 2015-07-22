@@ -1,6 +1,6 @@
 'use strict';
 
-var app = angular.module('demo', ['ngSanitize', 'ui.select']);
+var app = angular.module('demo', ['ngSanitize', 'fc.select2']);
 
 /**
  * AngularJS default filter with the following expression:
