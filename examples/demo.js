@@ -43,6 +43,12 @@ app.controller('DemoCtrl', function($scope, $http, $timeout, $interval) {
   $scope.disabled = undefined;
   $scope.searchEnabled = undefined;
 
+  $scope.breadcrumbs = [
+    {id: 0, name: '全部'},
+    {id: 1, name: '一级'},
+    {id: 2, name: '二级'}
+  ];
+
   $scope.setInputFocus = function (){
     $scope.$broadcast('UiSelectDemo1');
   }

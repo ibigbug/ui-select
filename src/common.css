@@ -316,6 +316,25 @@ disabled look for disabled choices in the results dropdown
 
 /* disabled styles */
 
+.fc-select-results .crumbs {
+  padding: 5px 0 10px 10px;
+}
+
+.fc-select-results .crumbs .crumb:after {
+  content: ">";
+  margin: 0 10px;
+  color: #aaa;
+}
+
+.fc-select-results .crumbs .crumb:last-child {
+  font-weight: bold;
+}
+
+.fc-select-results .crumbs .crumb:last-child:after {
+  margin: 0;
+  content: "";
+}
+
 .fc-select-container.fc-select-container-disabled .fc-select-choice {
     background-color: #f4f4f4;
     border: 1px solid #ddd;

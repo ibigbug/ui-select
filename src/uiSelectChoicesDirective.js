@@ -19,6 +19,10 @@ uis.directive('uiSelectChoices',
 
       return function link(scope, element, attrs, $select, transcludeFn) {
 
+        attrs.$observe('breadcrumbs', function(val) {
+          $select.breadcrumbs = scope.$eval(val);
+        });
+
         // var repeat = RepeatParser.parse(attrs.repeat);
         var groupByExp = attrs.groupBy;
         var groupFilterExp = attrs.groupFilter;
