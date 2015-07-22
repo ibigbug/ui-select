@@ -1,7 +1,7 @@
 /*!
  * ui-select
  * http://github.com/angular-ui/ui-select
- * Version: 0.12.0 - 2015-07-22T03:20:50.523Z
+ * Version: 0.12.0 - 2015-07-22T03:33:39.190Z
  * License: MIT
  */
 
@@ -183,19 +183,27 @@
     width: 100%;
     height: auto !important;
     min-height: 26px;
-    padding: 4px 20px 4px 5px;
-    margin: 0;
 
     outline: 0;
     font-family: sans-serif;
-    font-size: 1em;
 
-    border: 1px solid #aaa;
-    border-radius: 0;
+    border: 1px solid #d9d9d9;
+    box-shadow: none;
+    border-radius: 4px;
+    padding: 7px 32px 3px 10px;
+    margin: 5px auto;
 
-    -webkit-box-shadow: none;
-            box-shadow: none;
 
+}
+
+.fc-select-search .icon-search {
+    position: absolute;
+    right: 14px;
+    top: 14px;
+    width: 14px;
+    height: 14px;
+    line-height: 1;
+    color: #666;
 }
 
 .fc-select-drop.fc-select-drop-above .fc-select-search input {
