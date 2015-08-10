@@ -88,7 +88,7 @@ var uis = angular.module('fc.select2', [])
 
 .constant('uiSelectConfig', {
   theme: 'default',
-  searchEnabled: true,
+  searchEnabled: false,
   inline: false,  // emulate textarea
   sortable: false,
   placeholder: '', // Empty by default, like HTML tag <select>

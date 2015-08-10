@@ -6,7 +6,7 @@
 <span class="ui-select-match">
   <li class="ui-select-match-item fc-select-search-choice" ng-repeat="$item in $select.selected" 
       ng-class="{'fc-select-search-choice-focus':$selectMultiple.activeMatchIndex === $index, 'fc-select-locked':$select.isLocked(this, $index)}"
-      ui-select-sort="$select.selected">
+      >
       <span uis-transclude-append></span>
       <a href="javascript:;" class="ui-select-match-close fc-select-search-choice-close" ng-click="$selectMultiple.removeChoice($index)" tabindex="-1">&times;</a>
   </li>
